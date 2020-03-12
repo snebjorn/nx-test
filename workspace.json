@@ -1,6 +1,47 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "ng-lib": {
+      "projectType": "library",
+      "root": "libs/ng-lib",
+      "sourceRoot": "libs/ng-lib/src",
+      "prefix": "nx-test",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/ng-lib/tsconfig.lib.json",
+            "project": "libs/ng-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ng-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ng-lib/tsconfig.lib.json",
+              "libs/ng-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ng-lib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ng-lib/jest.config.js",
+            "tsConfig": "libs/ng-lib/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/ng-lib/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },
@@ -59,5 +100,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "ng-lib"
 }
