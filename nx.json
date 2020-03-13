@@ -13,6 +13,13 @@
   "projects": {
     "ng-lib": {
       "tags": []
+    },
+    "myapp": {
+      "tags": []
+    },
+    "myapp-e2e": {
+      "tags": [],
+      "implicitDependencies": ["myapp"]
     }
   }
 }
